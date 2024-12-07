@@ -21,5 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('analyze', views.analyze, name='analyze'),
+    path('upload', views.upload_image, name='upload'),
 
 ]
+
+admin.site.index_title="My Image"
+admin.site.site_header="My Image Admin"
+admin.site.site_title="Image Admin"

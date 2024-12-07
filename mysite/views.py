@@ -54,3 +54,26 @@ def analyze(request):
     if extraspaceremover != "on" and newlineremover != "on" and fullcaps != "on" and removepunc != "on":
         return HttpResponse("<h1>You have not choosen any text analyzer option</h1>")
     return render(request, 'analyze.html', params)
+
+
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from .forms import ImageUploadForm
+
+
+
+def upload_image(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Access the uploaded file
+            image = form.cleaned_data['image']
+            fs = FileSystemStorage(location=settings.MEDIA_ROOT)
+            filename = fs.save(image.name, image)  # Save the file in MEDIA_ROOT
+            uploaded_file_url = fs.url(filename)  # Get the URL for the uploaded file
+            print(f"Bhai ek baar uploaded file url to dekh lete=--=--{uploaded_file_url}")
+            return render(request, 'upload_success.html', {'file_url': uploaded_file_url})
+    else:
+        form = ImageUploadForm()
+
+    return render(request, 'upload_image.html', {'form': form})
