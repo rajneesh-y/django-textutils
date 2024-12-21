@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
+from myapp.views import category_page, home_page
 from . import views
 
 urlpatterns = [
@@ -22,8 +24,17 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('analyze', views.analyze, name='analyze'),
     path('upload', views.upload_image, name='upload'),
+    path("home/", home_page),
+    path("category/<int:cid>", category_page),
 
 ]
+
+
+from django.conf import settings
+from django.conf.urls.static import static
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 admin.site.index_title="My Image"
 admin.site.site_header="My Image Admin"
