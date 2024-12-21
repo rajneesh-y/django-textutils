@@ -36,6 +36,6 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # if settings.DEBUG:
 #     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-admin.site.index_title="My Image"
-admin.site.site_header="My Image Admin"
-admin.site.site_title="Image Admin"
+admin.site.index_title="My Shop"
+admin.site.site_header="My Shop Admin"
+admin.site.site_title="Shop Admin"
