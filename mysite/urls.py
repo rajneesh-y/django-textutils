@@ -16,16 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from myapp.views import category_page, home_page
+from myapp.views import category_page, home_page, shopitem
 from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", home_page),
     path('textutils', views.index, name='index'),
     path('analyze', views.analyze, name='analyze'),
     path('upload', views.upload_image, name='upload'),
-    path("", home_page),
     path("category/<int:cid>", category_page),
+    path("shopitem/<str:unique_id>/", shopitem),
 
 ]
 

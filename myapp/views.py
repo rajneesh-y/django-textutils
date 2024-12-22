@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse
 
 # Create your views here.
-from myapp.models import Category, Shop
+from myapp.models import Category, Shop, ShopItem
 
 # Create your views here.
 
@@ -20,3 +20,9 @@ def category_page(request,cid):
     data={'Shops':Shops,'categories':categories}
     print(f"categories data=-=-----{category}")
     return render(request,"home.html",data)
+
+def shopitem(request,unique_id):
+    shopitems=Shop.objects.get(unique_id=unique_id)
+    items=Shop.objects.filter(id=shopitems.id)
+    data={"items":items}
+    return render(request,"shopitem.html",data)
