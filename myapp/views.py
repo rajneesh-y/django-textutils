@@ -23,6 +23,6 @@ def category_page(request,cid):
 
 def shopitem(request,unique_id):
     shopitems=Shop.objects.get(unique_id=unique_id)
-    items=Shop.objects.filter(id=shopitems.id)
+    items=ShopItem.objects.filter(shopId=shopitems.id)
     data={"items":items}
     return render(request,"shopitem.html",data)
