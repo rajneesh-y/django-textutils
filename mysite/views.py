@@ -2,6 +2,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from mysite.forms import ResumeForm
+
 
 def index(request):
     return render(request, 'index.html')
@@ -58,22 +60,30 @@ def analyze(request):
 
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from .forms import ImageUploadForm
+
+from django.views import View
+class HomeView(View):
+    def get(self,request):
+        form=ResumeForm()
+        return render(request,"dashboard.html",{'form':form})
+    
+
+# from .forms import ImageUploadForm
 
 
 
-def upload_image(request):
-    if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            # Access the uploaded file
-            image = form.cleaned_data['image']
-            fs = FileSystemStorage(location=settings.MEDIA_ROOT)
-            filename = fs.save(image.name, image)  # Save the file in MEDIA_ROOT
-            uploaded_file_url = fs.url(filename)  # Get the URL for the uploaded file
-            print(f"Bhai ek baar uploaded file url to dekh lete=--=--{uploaded_file_url}")
-            return render(request, 'upload_success.html', {'file_url': uploaded_file_url})
-    else:
-        form = ImageUploadForm()
+# def upload_image(request):
+#     if request.method == 'POST':
+#         form = ImageUploadForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             # Access the uploaded file
+#             image = form.cleaned_data['image']
+#             fs = FileSystemStorage(location=settings.MEDIA_ROOT)
+#             filename = fs.save(image.name, image)  # Save the file in MEDIA_ROOT
+#             uploaded_file_url = fs.url(filename)  # Get the URL for the uploaded file
+#             print(f"Bhai ek baar uploaded file url to dekh lete=--=--{uploaded_file_url}")
+#             return render(request, 'upload_success.html', {'file_url': uploaded_file_url})
+#     else:
+#         form = ImageUploadForm()
 
-    return render(request, 'upload_image.html', {'form': form})
+#     return render(request, 'upload_image.html', {'form': form})
