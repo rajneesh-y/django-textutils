@@ -42,16 +42,18 @@ def login_view(request):
             user=form.get_user()
             login(request,user)
             return redirect('dashboard')
+        else:
+            messages.error(request, "Your are not registered. Please register yourself.")
+            return render(request,"login.html",{"form":form})
     else:
         form=AuthenticationForm()
     return render(request,"login.html",{"form":form})
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def dashboard(request):
-    print(f"login=-=---{request.user.is_authenticated}")
-    print(f"session item=----{request.session.items()}")
-    # if not request.user.is_authenticated:
-    #     return redirect('login')
+    print(f"check=-=-----{request.user.is_authenticated}")
+    if not request.user.is_authenticated:
+        return redirect('login')
     return render(request,"dashboard.html")
 
 def logout_view(request):

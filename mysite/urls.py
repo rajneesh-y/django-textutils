@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from myapp.views import category_page, dashboard, home_page, login_view, shopitem,register_view
+from myapp.views import category_page, dashboard, home_page, login_view, logout_view, shopitem,register_view
 from . import views
 
 urlpatterns = [
@@ -28,8 +28,10 @@ urlpatterns = [
     path("category/<int:cid>", category_page),
     path("shopitem/<str:unique_id>/", shopitem),
     path('register', register_view, name='register'),
-    path('dashboard', views.HomeView.as_view(), name='dashboard'),
+    # path('dashboard', views.HomeView.as_view(), name='dashboard'),
+    path('dashboard', dashboard, name='dashboard'),
     path('login', login_view, name='login'),
+    path('logout', logout_view, name='logout'),
 
 ]
 
