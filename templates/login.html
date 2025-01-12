@@ -1,0 +1,58 @@
+{% load static %}  <!-- Make sure static is loaded at the top -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Link to static CSS file -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <style>
+        .bg{
+            background: #B71C1C!important;
+        }
+        .nav-link:hover {
+      color: #FFEB3B; 
+        }
+    .btn-outline-light {
+    color: #fff; /* Change text color (white) */
+    border-color: #a733ff; /* Change border color (orange in this example) */
+    background-color: #242829; /* Change the background color */
+    }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Welcome Back!</h2>
+            <form action="#">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="forgot-password">
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <p>Don't have an account? <a href="register">Sign Up</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from myapp.views import category_page, home_page, shopitem
+from myapp.views import category_page, dashboard, home_page, login_view, shopitem,register_view
 from . import views
 
 urlpatterns = [
@@ -24,9 +24,12 @@ urlpatterns = [
     path("", home_page),
     path('textutils', views.index, name='index'),
     path('analyze', views.analyze, name='analyze'),
-    path('upload', views.upload_image, name='upload'),
+    # path('upload', views.upload_image,name="upload"),
     path("category/<int:cid>", category_page),
     path("shopitem/<str:unique_id>/", shopitem),
+    path('register', register_view, name='register'),
+    path('dashboard', views.HomeView.as_view(), name='dashboard'),
+    path('login', login_view, name='login'),
 
 ]
 

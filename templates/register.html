@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Bootstrap CSS (CDN) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #efdbdb;
+            font-family: 'Arial', sans-serif;
+        }
+        .registration-form {
+            max-width: 500px;
+            max-height: 600px;
+            margin: 10px auto;
+            background-color: #f3eeee;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 550px rgba(244, 35, 35, 0.1);
+        }
+        .registration-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .form-group label{
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group{
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .form-control {
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            padding: 5px 20px;
+            margin-bottom: 15px;
+            width: 90%;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: 10px solid #007bff;
+            width: 90%;
+            height: 40px;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 0px 10px 0px 0px;
+            text-align: center;
+            display: block;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border: 0px solid #0056b3;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 0px;
+        }
+        .form-footer a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        .errorlist {
+            color: red;
+            font-size: 0.9rem;
+        }
+        .bg{
+            background: #B71C1C!important;
+        }
+        .nav-link:hover {
+      color: #FFEB3B; 
+        }
+    .btn-outline-light {
+    color: #fff; /* Change text color (white) */
+    border-color: #a733ff; /* Change border color (orange in this example) */
+    background-color: #242829; /* Change the background color */
+    }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="registration-form">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+        <h2>Register (रजिस्टर करें)</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Username Field -->
+            <div class="form-group">
+                <label for="id_username">Username</label>
+                <input type="text" name="username" id="id_username" class="form-control" placeholder="Make Unique Name" value="{{ form.username.value }}">
+                {% if form.username.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="id_email">Email Address</label>
+                <input type="email" name="email" id="id_email" class="form-control" placeholder="Enter Your Email" value="{{ form.email.value }}">
+                {% if form.email.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.email.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="id_password">Password</label>
+                <input type="password" name="password" id="id_password" class="form-control" placeholder="Make Strong Password">
+                {% if form.password.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-group">
+                <label for="id_confirm_password">Confirm Password</label>
+                <input type="password" name="confirm_password" id="id_confirm_password" class="form-control" placeholder="Re-Enter Password">
+                {% if form.confirm_password.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.confirm_password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <!-- Terms & Conditions Checkbox -->
+            <div class="form-group">
+                <input type="checkbox" name="terms_accepted" id="id_terms_accepted" {% if form.terms_accepted.value %}checked{% endif %}>
+                <label for="id_terms_accepted">I agree to the <a href="#">Terms and Conditions</a></label>
+                {% if form.terms_accepted.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.terms_accepted.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+
+            <div class="form-footer">
+                <p>Already have an account? <a href="/login">Login here</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
